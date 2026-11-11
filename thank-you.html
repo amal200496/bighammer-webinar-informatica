@@ -126,14 +126,14 @@ a{color:inherit}
     <p class="event-chip"><strong>Free live webinar</strong> &nbsp;Thu 3 Dec, 11:00 AM ET</p>
   </div>
 </header>
-<p class="preview-bar" id="preview-bar" hidden>Preview mode: this sign-up was not sent to WebinarGeek, n8n or WhatsApp.</p>
+<p class="preview-bar" id="preview-bar" hidden>Preview mode: this sign-up was not sent to WebinarGeek or n8n.</p>
 
 <main>
 <section class="ty-hero" aria-labelledby="ty-title">
   <div class="container">
     <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="4,13 10,19 20,6" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="square" pathLength="1"/></svg></span>
     <h1 id="ty-title"><span id="ty-name">You're</span> registered!</h1>
-    <p class="lead">Your seat is saved for the live webinar with <b>Srinath Reddy</b> and <b>Richard Lawrence</b>. Take the four steps below so you don't miss it.</p>
+    <p class="lead">Your seat is saved for the live webinar with <b>Srinath Reddy</b> and <b>Richard Lawrence</b>. Take the three steps below so you don't miss it.</p>
     <div class="when">
       <p class="when-date">Thursday 3 December 2026<span class="nw"><span class="dot"> &middot; </span>11:00 AM ET</span></p>
       <p class="when-local" id="when-local" hidden></p>
@@ -162,17 +162,8 @@ a{color:inherit}
         </div>
       </article>
 
-      <article class="step" id="whatsapp-step">
-        <p class="step-n"><b>2</b><span>Step 2</span></p>
-        <h3>Message us on WhatsApp</h3>
-        <p>Send us a message and we'll reply with your join link, reminders and the session resources. This is optional. Reply STOP at any time to opt out of WhatsApp messages.</p>
-        <div class="actions">
-          <a class="btn btn-wa" id="whatsapp-link" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>Message us on WhatsApp</a>
-        </div>
-      </article>
-
       <article class="step demo">
-        <p class="step-n"><b>3</b><span>Step 3</span></p>
+        <p class="step-n"><b>2</b><span>Step 2</span></p>
         <h3>Book a 1:1 demo</h3>
         <p>Ready to modernize your Informatica estate without expanding headcount? Schedule a direct demo with our team to see BigHammer in action.</p>
         <div class="actions">
@@ -181,7 +172,7 @@ a{color:inherit}
       </article>
 
       <article class="step">
-        <p class="step-n"><b>4</b><span>Step 4</span></p>
+        <p class="step-n"><b>3</b><span>Step 3</span></p>
         <h3>Email confirmation sent</h3>
         <p>Check your email for your seat confirmation and session details. It comes from BigHammer.ai, so check your spam folder if you cannot see it. You can unsubscribe from any email.</p>
       </article>
@@ -202,10 +193,6 @@ a{color:inherit}
 
 <script>
 (function () {
-  /* WhatsApp Business number, international format, digits only (same as the live thank-you page). Empty hides step 2. */
-  var WHATSAPP_NUMBER = '13323014254';
-  /* GHL matches an inbound WhatsApp message to the registrant's own number, so the email is only added when there is no phone */
-  var INCLUDE_EMAIL_REFERENCE = true;
   var START = '20261203T160000Z', END = '20261203T170000Z', TARGET = Date.UTC(2026, 11, 3, 16, 0, 0);
 
   function $(id) { return document.getElementById(id); }
@@ -218,12 +205,6 @@ a{color:inherit}
       try { var raw = stores[i].getItem(key); if (raw) { return JSON.parse(raw); } } catch (e) { /* blocked or unparsable */ }
     }
     return null;
-  }
-  function waHref(reg) {
-    var opening = 'Hi Srinath, I have registered for the BigHammer Informatica webinar on Thursday 3 December 2026, 11:00 AM ET.';
-    var ask = ' Please send me my join link and resources.';
-    var ref = (INCLUDE_EMAIL_REFERENCE && reg && reg.email && !reg.phone) ? ' (' + reg.email + ')' : '';
-    return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(opening + ref + ask);
   }
 
   var reg = readStored('registrationData');
@@ -242,7 +223,6 @@ a{color:inherit}
   if (join) { $('watch-link').href = join; }
   else { $('watch-link').hidden = true; $('watch-note').hidden = false; }
 
-  if (WHATSAPP_NUMBER) { $('whatsapp-link').href = waHref(reg); } else { $('whatsapp-step').hidden = true; }
 
   /* calendar */
   var title = 'BigHammer.ai Live Webinar: Your Informatica Exit Plan';
