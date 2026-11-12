@@ -20,3 +20,12 @@ Page copy says BigHammer migrates jobs and workloads from Informatica PowerCente
 
 ## Source of content
 Hero, problem, four stages and proof pack come from "Informatica Flyer_2452.pdf" and bighammer.ai/ai-agent-migrate. No customer quotes or numbers were invented; the one testimonial and the host bios are carried over from the October page.
+
+## How to change the page (edit locally, push, Cloudflare deploys)
+1. Edit `index.html` or `thank-you.html` in this folder (`C:\Users\iamal\Claude Code\GC TASK\bighammer-webinar-informatica`).
+2. Look at it locally: `py -m http.server 8000` in this folder, then open http://localhost:8000 (sign-ups are simulated there).
+3. Commit and push to `main`: `git add -A && git commit -m "what changed" && git push`.
+4. Cloudflare Workers Builds (project `bighammer-webinar-informatica`, deploy command `npx wrangler deploy`) picks up the push and publishes to https://informatica.webinar.bighammerai.com/ in about a minute.
+5. Check the build under Cloudflare, Workers & Pages, the project, Deployments. If a push does not create a build, the Cloudflare to GitHub link is broken: Settings, Builds, Manage, and reconnect.
+
+Only `index.html`, `thank-you.html` and `og-image.png` are served; everything else is excluded by `.assetsignore`.
