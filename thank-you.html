@@ -133,7 +133,7 @@ a{color:inherit}
   <div class="container">
     <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="4,13 10,19 20,6" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="square" pathLength="1"/></svg></span>
     <h1 id="ty-title"><span id="ty-name">You're</span> registered!</h1>
-    <p class="lead">Your seat is saved for the live webinar with <b>Srinath Reddy</b> and <b>Richard Lawrence</b>. Take the three steps below so you don't miss it.</p>
+    <p class="lead">Your seat is saved for the live webinar with <b>Srinath Reddy</b>, <b>Richard Lawrence</b> and <b>Varadha S</b>. Take the three steps below so you don't miss it.</p>
     <div class="when">
       <p class="when-date">Thursday 3 December 2026<span class="nw"><span class="dot"> &middot; </span>11:00 AM ET</span></p>
       <p class="when-local" id="when-local" hidden></p>
@@ -154,7 +154,7 @@ a{color:inherit}
       <article class="step key">
         <p class="step-n"><b>1</b><span>Step 1</span></p>
         <h3>Secure your direct webinar entry</h3>
-        <p>Save this link to your calendar. This is where you will join Srinath Reddy and Richard Lawrence live.</p>
+        <p>Save this link to your calendar. This is where you will join Srinath Reddy, Richard Lawrence and Varadha S live.</p>
         <p class="note" id="watch-note" hidden>Your personal join link is in your confirmation email. Check your inbox (and spam folder) for it.</p>
         <div class="actions">
           <a class="btn btn-primary" id="watch-link" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>Access webinar seat</a>
@@ -226,7 +226,7 @@ a{color:inherit}
 
   /* calendar */
   var title = 'BigHammer.ai Live Webinar: Your Informatica Exit Plan';
-  var details = 'Free 60-minute live session (40 minutes demo, 20 minutes live Q&A) with Srinath Reddy and Richard Lawrence.' + (join ? ' Join: ' + join : ' Your join link is in your confirmation email.');
+  var details = 'Free 60-minute live session (40 minutes demo, 20 minutes live Q&A) with Srinath Reddy, Richard Lawrence and Varadha S.' + (join ? ' Join: ' + join : ' Your join link is in your confirmation email.');
   $('cal-google').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(title) + '&dates=' + START + '/' + END + '&details=' + encodeURIComponent(details);
   var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//BigHammer.ai//Webinar//EN', 'BEGIN:VEVENT', 'UID:informatica-webinar-20261203@bighammer.ai', 'DTSTAMP:20260101T000000Z',
     'DTSTART:' + START, 'DTEND:' + END, 'SUMMARY:' + title, 'DESCRIPTION:' + details, join ? 'URL:' + join : '', 'END:VEVENT', 'END:VCALENDAR'].filter(Boolean).join('\r\n');
