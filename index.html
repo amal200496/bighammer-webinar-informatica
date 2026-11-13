@@ -1045,7 +1045,6 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
           <div class="field">
             <label for="phone">Phone number <span style="font-weight:400;opacity:.7">(optional)</span></label>
             <input class="input" type="tel" id="phone" autocomplete="tel">
-            <p class="help" id="phone-help">Optional. For your seat and event updates.</p>
             <p class="err" id="phone-err" hidden></p>
           </div>
 
@@ -1844,7 +1843,7 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
         return EMAIL_RE.test(v) ? '' : 'Enter a valid email address, like name@company.com.';
     } },
     { id: 'company', check: function () { return $('company').value.trim() ? '' : 'Enter your company name.'; } },
-    { id: 'phone', help: 'phone-help', check: function () {
+    { id: 'phone', check: function () {
         var digits = phoneInput.value.replace(/\D/g, '');
         if (!digits) { return ''; } /* optional */
         /* utils not loaded (CDN blocked): don't block the sign-up, just require a plausible length */
