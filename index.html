@@ -1043,9 +1043,9 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
           </div>
 
           <div class="field">
-            <label for="phone">Phone number</label>
-            <input class="input" type="tel" id="phone" autocomplete="tel" required aria-required="true">
-            <p class="help" id="phone-help">For your seat and event updates.</p>
+            <label for="phone">Phone number <span style="font-weight:400;opacity:.7">(optional)</span></label>
+            <input class="input" type="tel" id="phone" autocomplete="tel">
+            <p class="help" id="phone-help">Optional. For your seat and event updates.</p>
             <p class="err" id="phone-err" hidden></p>
           </div>
 
@@ -1845,7 +1845,7 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
     { id: 'company', check: function () { return $('company').value.trim() ? '' : 'Enter your company name.'; } },
     { id: 'phone', help: 'phone-help', check: function () {
         var digits = phoneInput.value.replace(/\D/g, '');
-        if (!digits) { return 'Enter your phone number.'; }
+        if (!digits) { return ''; } /* optional */
         /* utils not loaded (CDN blocked): don't block the sign-up, just require a plausible length */
         if (iti && phoneUtilsReady()) { return iti.isValidNumber() ? '' : 'Enter a valid number for the selected country.'; }
         return digits.length >= 6 ? '' : 'Enter a valid phone number.';
