@@ -1031,9 +1031,15 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
           </div>
 
           <div class="field">
-            <label for="email">Work email</label>
+            <label for="email">Email</label>
             <input class="input" type="email" id="email" name="email" autocomplete="email" inputmode="email" required aria-required="true">
             <p class="err" id="email-err" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="company">Company</label>
+            <input class="input" type="text" id="company" name="company_input" autocomplete="organization" required aria-required="true">
+            <p class="err" id="company-err" hidden></p>
           </div>
 
           <div class="field">
@@ -1047,6 +1053,7 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
           <div class="offscreen-fields" aria-hidden="true">
             <input type="text" name="first_name" id="ghlFirstName" tabindex="-1" readonly autocomplete="off">
             <input type="text" name="last_name" id="ghlLastName" tabindex="-1" readonly autocomplete="off">
+            <input type="text" name="company_name" id="ghlCompany" tabindex="-1" readonly autocomplete="off">
             <input type="text" name="phone" id="ghlPhone" tabindex="-1" readonly autocomplete="off">
             <input type="text" name="phone_number" id="ghlPhoneNumber" tabindex="-1" readonly autocomplete="off">
             <input type="text" name="readable_webinar_date" id="ghlWebinarDate" tabindex="-1" readonly autocomplete="off">
@@ -1832,9 +1839,10 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
     { id: 'fname', check: function () { return $('fname').value.trim() ? '' : 'Enter your full name.'; } },
     { id: 'email', check: function () {
         var v = $('email').value.trim();
-        if (!v) { return 'Enter your work email.'; }
+        if (!v) { return 'Enter your email.'; }
         return EMAIL_RE.test(v) ? '' : 'Enter a valid email address, like name@company.com.';
     } },
+    { id: 'company', check: function () { return $('company').value.trim() ? '' : 'Enter your company name.'; } },
     { id: 'phone', help: 'phone-help', check: function () {
         var digits = phoneInput.value.replace(/\D/g, '');
         if (!digits) { return 'Enter your phone number.'; }
@@ -1883,6 +1891,7 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
       summary.textContent = 'Please fix ' + bad + (bad === 1 ? ' field' : ' fields') + ' below to save your seat.';
       summary.hidden = false;
       firstBad.focus();
+    var company = $('company').value.trim();
       return;
     }
     summary.hidden = true;
@@ -1923,7 +1932,7 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
       /* n8n: same payload as the live page, plus UTM fields */
       var lead = {
         formType: 'registrant', timestamp: new Date().toISOString(),
-        name: name, email: email, phone: phone, company: '', role: '',
+        name: name, email: email, phone: phone, company: company, role: '',
         clientId: CLIENT_ID, submittedFromUrl: window.location.href, broadcastId: broadcastId,
         webinarTitle: bd.webinar_title || '', webinarDate: bd.readable_date || '',
         source: 'Landing Page Registration'
@@ -1937,7 +1946,7 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
       try {
         var rr = await fetch(BACKEND_URL + '/api/v1/webinar/register', {
           method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ name: nm.first, firstName: nm.first, lastName: nm.last, email: email, phone: phone, companyName: '',
+          body: JSON.stringify({ name: nm.first, firstName: nm.first, lastName: nm.last, email: email, phone: phone, companyName: company,
             submittedFromUrl: window.location.href, terms: true, broadcastId: broadcastId, clientId: CLIENT_ID })
         });
         if (rr.ok) { reg = await rr.json(); }
@@ -1946,6 +1955,7 @@ a:focus-visible,button:focus-visible{outline-offset:3px}
 
       /* GoHighLevel: fill the off-screen fields, then fire one trusted submit for the GHL tracker */
       var watchLink = (reg && reg.watchLink) || bd.public_replay_link || '';
+      $('ghlCompany').value = company;
       $('ghlFirstName').value = nm.first;
       $('ghlLastName').value = nm.last;
       $('ghlPhone').value = phone;
