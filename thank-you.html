@@ -193,7 +193,7 @@ a{color:inherit}
 
 <script>
 (function () {
-  var START = '20261203T160000Z', END = '20261203T170000Z', TARGET = Date.UTC(2026, 11, 3, 16, 0, 0);
+  var START = '20261203T160000Z', END = '20261203T164500Z', TARGET = Date.UTC(2026, 11, 3, 16, 0, 0);
 
   function $(id) { return document.getElementById(id); }
   /* the page asks people to bookmark it, so prefer the copy that survives a browser restart */
@@ -226,7 +226,7 @@ a{color:inherit}
 
   /* calendar */
   var title = 'BigHammer.ai Live Webinar: Your Informatica Exit Plan';
-  var details = 'Free 60-minute live session (40 minutes demo, 20 minutes live Q&A) with Srinath Reddy, Richard Lawrence and Varadha S.' + (join ? ' Join: ' + join : ' Your join link is in your confirmation email.');
+  var details = 'Free 45-minute live session (30 minutes demo, 15 minutes live Q&A) with Srinath Reddy, Richard Lawrence and Varadha S.' + (join ? ' Join: ' + join : ' Your join link is in your confirmation email.');
   $('cal-google').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(title) + '&dates=' + START + '/' + END + '&details=' + encodeURIComponent(details);
   var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//BigHammer.ai//Webinar//EN', 'BEGIN:VEVENT', 'UID:informatica-webinar-20261203@bighammer.ai', 'DTSTAMP:20260101T000000Z',
     'DTSTART:' + START, 'DTEND:' + END, 'SUMMARY:' + title, 'DESCRIPTION:' + details, join ? 'URL:' + join : '', 'END:VEVENT', 'END:VCALENDAR'].filter(Boolean).join('\r\n');
